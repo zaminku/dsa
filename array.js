@@ -1,3 +1,53 @@
+// # For example, the base[1, 4, 6] gives us the following pyramid
+// #     15
+// #   5   10
+// # 1   4    6
+
+// def pyramid_sum(base)
+// levels = [base]
+
+// while base.length != 1
+//     base = adjacent_sum(base)
+// levels.unshift(base)
+// end
+// return levels
+// end
+
+// def adjacent_sum(nums)
+// sums = []
+
+//     (0...nums.length - 1).each do | i |
+//         sums << nums[i] + nums[i + 1]
+//   end
+
+//   return sums
+// end
+
+
+
+// Write a method vowel_cipher that takes in a string and returns a new string where every vowel becomes the next vowel in the alphabet.
+// def vowel_cipher(string)
+// vowels = "aeiou"
+// new_str = ""
+
+// string.each_char do | char |
+//     if vowels.include ? (char)
+//       new_str += vowels[(vowels.index(char) + 1) % vowels.length]
+// else
+//     new_str += char
+// end
+// end
+// return new_str
+// end
+
+
+
+
+
+
+
+
+
 // II. ARRAY AND STRING PROBLEMS
 
 // max value
@@ -325,3 +375,103 @@ const fiveSort = (nums) => {
 };
 
 
+// bubble sort
+
+Array.prototype.bubbleSort = function (callback) {
+
+    if (callback === undefined) {
+        callback = function (a, b) {
+            if (a > b) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+    }
+
+    let result = this.slice();
+    let sorted = false
+
+    while (!sorted) {
+        sorted = true
+
+        for (i = 0; i < this.length - 1; i++) {
+            let a = result[i];
+            let b = result[i + 1]
+            if (callback(a, b) === 1) {
+                sorted = false;
+                let temp = result[i];
+                result[i] = result[i + 1];
+                result[i + 1] = temp;
+            }
+        }
+    }
+    return result;
+
+}
+
+
+
+
+
+
+// merge sort
+Array.prototype.mergeSort = function (func) {
+    if (this.length <= 1) return this;
+
+    if (!func) func = (left, right) => {
+        return left > right ? 1 : left < right ? -1 : 0;
+    }
+
+    let midpoint = Math.floor(this.length / 2);
+    let sortedLeft = this.slice(0, midpoint).mergeSort(func);
+    let sortedRight = this.slice(midpoint).mergeSort(func);
+    return merge(sortedLeft, sortedRight, func);
+}
+
+function merge(left, right, comp) {
+    let merged = [];
+
+    while (left.length && right.length) {
+        switch (comp(left[0], right[0])) {
+            case -1:
+                merged.push(left.shift());
+                break;
+            case 0:
+                merged.push(left.shift());
+                break;
+            case 1:
+                merged.push(right.shift());
+                break;
+        }
+    }
+
+    merged = merged.concat(left, right);
+    return merged;
+}
+
+
+
+// Write an `Array.prototype.myRotate(times)` method which rotates the array by 
+// the given argument. If no argument is given, rotate the array by one position. 
+// ex.
+// ["a", "b", "c", "d"].myRotate() => ["b", "c", "d", "a"]
+// ["a", "b", "c", "d"].myRotate(2) => ["c", "d", "a", "b"]
+// ["a", "b", "c", "d"].myRotate(-1) => ["d", "a", "b", "c"]
+
+Array.prototype.myRotate = function (times = 1) {
+    let rotations;
+    const rotated = this.slice(0);
+
+    if (times < 0) {
+        rotations = this.length + (times % this.length);
+    } else {
+        rotations = times % this.length;
+    }
+
+    for (let i = 0; i < rotations; i++) {
+        rotated.push(rotated.shift());
+    }
+
+    return rotated;
+}
