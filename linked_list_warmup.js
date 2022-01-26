@@ -19,16 +19,24 @@ c.next = d;
 
 
 // iterate through linked list (non-recursive)
-const printLinkedList = (head) => {
-    let current = head;
+// const printLinkedList = (head) => {
+//     let current = head;
 
-    // common mistake to write current.next !== null (won't print out D bc d.next = null)
-    while (current !== null) {
-        console.log(current.val);
-        current = current.next;
-    }
-};
+//     // common mistake to write current.next !== null (won't print out D bc d.next = null)
+//     while (current !== null) {
+//         console.log(current.val);
+//         current = current.next;
+//     }
+// };
+
+
+
+// iterate through linked list (recursive!)
+const printLinkedList = (head) => {
+    if (head === null) return;
+    console.log(head.val);
+    printLinkedList(head.next);
+}
+
 
 printLinkedList(a);
-
-
