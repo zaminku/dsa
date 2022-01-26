@@ -1,4 +1,3 @@
-
 const linkedListValues = (head) => {
     const values = [];
     let current = head;
