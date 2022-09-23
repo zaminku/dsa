@@ -161,8 +161,8 @@ const reverseList = (head) => {
 }
 
 
-// iterative
-// time: O(n)
+// iterative 
+// t3ime: O(n)
 // space: O(1)
 
 // const reverseList = (head, prev = null) => {
