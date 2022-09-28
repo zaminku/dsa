@@ -27,6 +27,8 @@ const uncompress = (s) => {
 // Time: O(n * m)
 // Space: O(n * m)
 
+// String concatenation is O(n) in JS, but pushing an element to end of array is O(1)
+
 //--------------------------------------------------------------------------------
 // Write a function, uncompress, that takes in a string as an argument. The input string will be formatted into multiple groups according to the following pattern:
 
